@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { useAPI } from "../../context/APIContext";
 import { TSeminar } from "../../types/types";
 
-const Form = ({ seminar }: { seminar: TSeminar }) => {
+const Form = ({
+	seminar,
+	closeModal,
+}: {
+	seminar: TSeminar;
+	closeModal(): void;
+}) => {
 	const { updateSeminar } = useAPI();
 
 	const [formData, setFormData] = useState<TSeminar>({
@@ -14,7 +20,9 @@ const Form = ({ seminar }: { seminar: TSeminar }) => {
 		photo: seminar.photo,
 	});
 
-	async function handleChange(evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+	async function handleChange(
+		evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) {
 		const { name, value } = evt.target;
 		setFormData({
 			...formData,
@@ -27,6 +35,7 @@ const Form = ({ seminar }: { seminar: TSeminar }) => {
 
 		try {
 			await updateSeminar(formData.id, formData);
+			closeModal();
 		} catch (error) {
 			alert(`Error: ${error}`);
 		}
@@ -37,6 +46,7 @@ const Form = ({ seminar }: { seminar: TSeminar }) => {
 			<div>
 				<label>Название:</label>
 				<input
+					className="form__input"
 					type="text"
 					name="title"
 					value={formData.title}
@@ -47,6 +57,7 @@ const Form = ({ seminar }: { seminar: TSeminar }) => {
 			<div>
 				<label>Описание:</label>
 				<textarea
+					className="form__textarea"
 					name="description"
 					value={formData.description}
 					onChange={handleChange}
@@ -56,6 +67,7 @@ const Form = ({ seminar }: { seminar: TSeminar }) => {
 			<div>
 				<label>Дата:</label>
 				<input
+					className="form__input"
 					type="date"
 					name="date"
 					value={formData.date}
@@ -66,6 +78,7 @@ const Form = ({ seminar }: { seminar: TSeminar }) => {
 			<div>
 				<label>Время:</label>
 				<input
+					className="form__input"
 					type="time"
 					name="time"
 					value={formData.time}
@@ -76,6 +89,7 @@ const Form = ({ seminar }: { seminar: TSeminar }) => {
 			<div>
 				<label>Фото (URL):</label>
 				<input
+					className="form__input"
 					type="url"
 					name="photo"
 					value={formData.photo}
@@ -83,7 +97,9 @@ const Form = ({ seminar }: { seminar: TSeminar }) => {
 					required
 				/>
 			</div>
-			<button type="submit">Сохранить изменения</button>
+			<button className="form__button button" type="submit">
+				Сохранить изменения
+			</button>
 		</form>
 	);
 };
