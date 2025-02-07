@@ -2,7 +2,7 @@ import { TSeminar, TSeminars } from "../types/types";
 const URL = import.meta.env.VITE_URL;
 
 // Типы данных для класса API
-interface IAPI {
+export interface IAPI {
 	URL: string;
 	getData(): Promise<TSeminars>;
 	editData(id: number, updateData: TSeminar): Promise<void>;
