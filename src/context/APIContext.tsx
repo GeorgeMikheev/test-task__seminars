@@ -6,7 +6,7 @@ interface IAPIContext {
 	seminars: TSeminars | null;
 	getSeminars: () => Promise<void>;
 	updateSeminar: (id: number, seminar: TSeminar) => Promise<void>;
-	deleteSeminar: (id: number) => Promise<void>;
+	deleteSeminar: (id: number | null) => Promise<void>;
 }
 
 export const APIContext = createContext<IAPIContext | null>(null);
@@ -36,7 +36,8 @@ export const APIProvider = ({ children }: { children: React.ReactNode }) => {
 		}
 	}
 
-	async function deleteSeminar(id: number) {
+	async function deleteSeminar(id: number | null) {
+		if(!id) return;
 		try {
 			await api.deleteData(id);
 			getSeminars();
