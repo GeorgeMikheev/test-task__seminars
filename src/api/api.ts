@@ -1,6 +1,7 @@
 import { TSeminar, TSeminars } from "../types/types";
+const URL = import.meta.env.VITE_URL;
 
-// Типы данный для класса API
+// Типы данных для класса API
 interface IAPI {
 	URL: string;
 	getData(): Promise<TSeminars>;
@@ -30,7 +31,10 @@ export class API implements IAPI {
 			method: "PATCH",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(updateData),
-		}).then((res) => res.json());
+		}).then((res) => {
+			if (res.ok) return res.json();
+			else throw new Error("Edit failed");
+		});
 	}
 
 	// Удаление семинара:
@@ -38,6 +42,11 @@ export class API implements IAPI {
 		return fetch(`${this.URL}/${id}`, {
 			method: "DELETE",
 			headers: { "Content-Type": "application/json" },
-		}).then((res) => res.json());
+		}).then((res) => {
+			if (res.ok) return res.json();
+			else throw new Error("Delete failed");
+		});
 	}
 }
+
+export const api = new API(URL);
