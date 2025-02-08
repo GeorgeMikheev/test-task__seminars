@@ -1,9 +1,14 @@
 import { TSeminar } from "../../types/types";
 import { Iprops } from "../App/App";
+import "./Card.sass";
 
 const Card = ({ data, props }: { data: TSeminar; props: Iprops }) => {
-	function reverseDate(date: string) {
-		return date.split(".").reverse().join("-");
+	function reverseDate(date: any) {
+		const parts = date.split("-");
+		if (parts.length === 3) {
+			return `${parts[2]}.${parts[1]}.${parts[0]}`;
+		}
+		return date;
 	}
 
 	return (
@@ -16,19 +21,19 @@ const Card = ({ data, props }: { data: TSeminar; props: Iprops }) => {
 					{data.time}
 				</time>
 				<time className="card__date" dateTime={reverseDate(data.date)}>
-					{data.date}
+					{reverseDate(data.date)}
 				</time>
 			</div>
 			<div className="card__buttons">
 				<button
 					type="button"
-					className="card__button"
+					className="card__button edit-button"
 					onClick={() => props.openEditModal(data)}>
 					Редактировать
 				</button>
 				<button
 					type="button"
-					className="card__button"
+					className="card__button delete-button"
 					onClick={() => props.openDeleteModal(data)}>
 					Удалить
 				</button>
