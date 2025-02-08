@@ -4,6 +4,10 @@ import { TSeminar } from "../../types/types";
 import Modal from "../Modal/Modal";
 import Form from "../Form/Form";
 import { useAPI } from "../../context/APIContext";
+import "./App.sass";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import ModalContentDelete from "../ModalContentDelete/ModalContentDelete";
 
 export interface Iprops {
 	openEditModal(seminar: TSeminar): void;
@@ -35,10 +39,10 @@ const App = () => {
 		setIsModalOpen(false);
 	}
 
-    function deleteCard() {
-        deleteSeminar(selectedSeminar ? selectedSeminar.id : null);
-        closeModal();
-    }
+	function deleteCard() {
+		deleteSeminar(selectedSeminar ? selectedSeminar.id : null);
+		closeModal();
+	}
 
 	const props: Iprops = {
 		openEditModal,
@@ -46,25 +50,20 @@ const App = () => {
 	};
 
 	return (
-		<>
+		<div className="app">
+			<Header />
 			<CardList props={props} />
 			{isModalOpen && (
 				<Modal closeModal={closeModal}>
 					{modalType === "EDIT" && selectedSeminar ? (
 						<Form seminar={selectedSeminar} closeModal={closeModal} />
 					) : (
-						<div className="modal__content-delete">
-							<p>Вы действительно хотите удалить семинар?</p>
-							<button
-								className="modal__button button"
-								onClick={deleteCard}>
-								Удалить
-							</button>
-						</div>
+						<ModalContentDelete deleteCard={deleteCard} />
 					)}
 				</Modal>
 			)}
-		</>
+			<Footer />
+		</div>
 	);
 };
 
