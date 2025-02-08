@@ -8,16 +8,15 @@ const CardList = ({ props }: { props: Iprops }) => {
 	const { seminars } = useAPI();
 
 	return (
+		seminars ? (
 		<div className="card-list">
-			{seminars ? (
-				seminars.map((seminar) => (
+			{seminars.map((seminar) => (
 					<Card key={seminar.id} data={seminar} props={props} />
-				))
-			) : (
-				<ErrorMessage />
-			)}
+			))}
 		</div>
-	);
+	) : (
+		<ErrorMessage />
+	));
 };
 
 export default CardList;
