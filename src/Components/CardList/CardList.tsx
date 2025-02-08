@@ -2,6 +2,7 @@ import { useAPI } from "../../context/APIContext";
 import { Iprops } from "../App/App";
 import Card from "../Card/Card";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import './CardList.sass';
 
 const CardList = ({ props }: { props: Iprops }) => {
 	const { seminars } = useAPI();
