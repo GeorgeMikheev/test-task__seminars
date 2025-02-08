@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAPI } from "../../context/APIContext";
 import { TSeminar } from "../../types/types";
+import "./Form.sass";
 
 const Form = ({
 	seminar,
@@ -42,8 +43,9 @@ const Form = ({
 	}
 
 	return (
-		<form onSubmit={handleSubmit} className="form">
-			<div>
+		<form onSubmit={handleSubmit} className="modal__content form">
+			<h2 className="form__title">Редактировать семинар</h2>
+			<div className="form__group">
 				<label>Название:</label>
 				<input
 					className="form__input"
@@ -54,7 +56,7 @@ const Form = ({
 					required
 				/>
 			</div>
-			<div>
+			<div className="form__group">
 				<label>Описание:</label>
 				<textarea
 					className="form__textarea"
@@ -64,7 +66,7 @@ const Form = ({
 					required
 				/>
 			</div>
-			<div>
+			<div className="form__group">
 				<label>Дата:</label>
 				<input
 					className="form__input"
@@ -75,7 +77,7 @@ const Form = ({
 					required
 				/>
 			</div>
-			<div>
+			<div className="form__group">
 				<label>Время:</label>
 				<input
 					className="form__input"
@@ -86,7 +88,7 @@ const Form = ({
 					required
 				/>
 			</div>
-			<div>
+			<div className="form__group">
 				<label>Фото (URL):</label>
 				<input
 					className="form__input"
@@ -97,7 +99,7 @@ const Form = ({
 					required
 				/>
 			</div>
-			<button className="form__button button" type="submit">
+			<button className="form__button modal__button button" type="submit">
 				Сохранить изменения
 			</button>
 		</form>
