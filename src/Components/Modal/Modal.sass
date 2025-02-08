@@ -1,0 +1,48 @@
+@import '../../variables'
+    
+.modal
+    background-color: white
+    border-radius: 12px
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+    overflow: hidden
+    padding: 25px 15px
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 8px
+
+    &__content
+        display: flex
+        flex-direction: column
+        align-items: center
+
+    &__text
+        font-size: 1rem
+        color: $text-color
+        margin-bottom: 12px
+
+    &__button
+        padding: 8px 16px
+        border: none
+        border-radius: 6px
+        font-size: 0.9rem
+        cursor: pointer
+        transition: background-color 0.3s ease
+        background-color: $accent-color
+        color: white
+        width: 60%
+
+        &:hover 
+            background-color: darken($accent-color, 10%)
+    
+.modal-overlay 
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: rgba(0, 0, 0, 0.8)
+    display: flex
+    justify-content: center
+    align-items: center
+    z-index: 1000
